@@ -1,4 +1,4 @@
-SOURCEOBJS = main.cpp leftrect.cpp rightrect.cpp PolStr.o
+SOURCEOBJS = main.cpp leftrect.cpp rightrect.cpp simpson.cpp PolStr.o
 main :
 	g++ -o lab7 $(SOURCEOBJS) 
 main-32 :
