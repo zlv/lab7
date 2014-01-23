@@ -6,6 +6,10 @@
 #include <stdexcept>
 #include <vector>
 using namespace std;
+double leftrect_uneven(double *y, double *x, int n);
+double leftrect_even(double *y, double h, int n);
+double rightrect_uneven(double *y, double *x, int n);
+double rightrect_even(double *y, double h, int n);
 int main(int argc, char **argv) {
     try {
         int m; //формула интегрирования (в порядке их перечисления в п. 2.7.1), при m = 5 используется дополнительный метод;
@@ -45,6 +49,20 @@ int main(int argc, char **argv) {
         }
         double deviation;
         cin >> deviation;
+        double result;
+        if (m==1) {
+            if (g=="e")
+                result = leftrect_even(y,(b-a)/n,n);
+            else if (g=="u")
+                result = leftrect_uneven(y,x,n);
+        }
+        if (m==2) {
+            if (g=="e")
+                result = rightrect_even(y,(b-a)/n,n);
+            else if (g=="u")
+                result = rightrect_uneven(y,x,n);
+        }
+        cout << result << endl;
         if (g=="u") {
             delete[] x;
         }
