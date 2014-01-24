@@ -6,12 +6,8 @@
 #include <stdexcept>
 #include <vector>
 #include "func.h"
+#include "dynamical.h"
 using namespace std;
-double leftrect_uneven(Func *y, double *x, int n);
-double leftrect_even(Func *y, double h, int n);
-double leftrect_dynamical(Func *y, double h, int n, double);
-double rightrect_uneven(double *y, double *x, int n);
-double rightrect_even(double *y, double h, int n);
 int main(int argc, char **argv) {
     try {
         int m; //формула интегрирования (в порядке их перечисления в п. 2.7.1), при m = 5 используется дополнительный метод;
@@ -55,21 +51,37 @@ int main(int argc, char **argv) {
         if (g=="d")
             cin >> deviation;
         double result;
-        if (m==1) {
-            if (g=="e")
-                result = leftrect_even(&f,(b-a)/n,n);
-            else if (g=="u")
-                result = leftrect_uneven(&f,x,n);
-            else if (g=="d")
-                result = leftrect_dynamical(&f,(b-a)/n,n,deviation);
+        int k;
+        double eps0;
+        if (g=="d") {
+            result = dynamical(&f,(b-a)/n,n,deviation,k,eps0,m);
         }
-        if (m==2) {
-            if (g=="e")
-                result = rightrect_even(y,(b-a)/n,n);
-            else if (g=="u")
-                result = rightrect_uneven(y,x,n);
+        else {
+            if (m==1) {
+                if (g=="e")
+                    result = leftrect_even(&f,(b-a)/n,n);
+                else if (g=="u")
+                    result = leftrect_uneven(&f,x,n);
+            }
+            if (m==2) {
+                if (g=="e")
+                    result = rightrect_even(&f,(b-a)/n,n);
+                else if (g=="u")
+                    result = rightrect_uneven(&f,x,n);
+            }
+            if (m==4) {
+                if (g=="e")
+                    result = simpson_even(&f,(b-a)/n,n);
+                else if (g=="u")
+                    result = simpson_uneven(&f,x,n);
+            }
         }
-        cout << result << endl;
+        if (g=="d")
+            cout.precision(-log10(deviation));
+        cout << "Integral: "<< result << endl;
+        if (g=="d") {
+            cout << "Iteration count: " << k << "\neps0: " << eps0 << endl;
+        }
     }
     catch (invalid_argument &e) {
         cerr << e.what() << endl;

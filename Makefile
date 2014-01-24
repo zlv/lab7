@@ -1,5 +1,5 @@
-HEADERS = func.h util.h
-SOURCEOBJS = main.cpp leftrect.cpp rightrect.cpp simpson.cpp PolStr.o
+HEADERS = func.h util.h dynamical.h
+SOURCEOBJS = main.cpp leftrect.cpp rightrect.cpp simpson.cpp dynamical.cpp PolStr.o
 main : $(SOURCEOBJS) $(HEADERS)
 	g++ -o lab7 $(SOURCEOBJS) 
 main-32 :
