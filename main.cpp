@@ -69,6 +69,12 @@ int main(int argc, char **argv) {
                 else if (g=="u")
                     result = rightrect_uneven(&f,x,n);
             }
+            if (m==3) {
+                if (g=="e")
+                    result = trapeze_even(&f,(b-a)/n,n);
+                else if (g=="u")
+                    result = trapeze_uneven(&f,x,n);
+            }
             if (m==4) {
                 if (g=="e")
                     result = simpson_even(&f,(b-a)/n,n);

@@ -20,8 +20,6 @@ double dynamical(Func *y, double h, int n, double eps, int& k, double& eps0, int
            i1 = leftrect_even(y,h,n1);
         else if (m==2)
            i1 = rightrect_even(y,h,n1);
-        else if (m==3)
-           i1 = trapeze_even(y,h,n1);
         else if (m==4)
            i1 = simpson_even(y,h,n1);
         k++;
